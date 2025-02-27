@@ -60,15 +60,16 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" readonly>
             <?php
                 if(isset($_POST['eleitores']) && (isset($_POST['brancos'])) && (isset($_POST['nulos'])) && (isset($_POST['validos'])) && $_POST['eleitores'] != "" && $_POST['brancos'] != "" && $_POST['nulos'] != "" && $_POST['validos'] != ""){
-                    if($eleitores == "" || $brancos == "" || $nulos == "" || $validos == ""){
-                        echo "Preencha os campos!";
 
-                    }else{
-                        echo "\nO percentual de votos brancos é: " .brancos($eleitores,$brancos). "% da quantidade total de eleitores";
-                        echo "\nO percentual de votos nulos é: " .nulos($eleitores,$nulos). "% da quantidade total de eleitores";
-                        echo "\nO percentual de votos validos é: " .validos($eleitores,$validos). "% da quantidade total de eleitores";
+                    if(($brancos + $validos + $nulos) == $eleitores){
+                        echo "\nO percentual de votos brancos é: " .porcentagem($eleitores,$brancos). "% da quantidade total de eleitores";
+                        echo "\nO percentual de votos nulos é: " .porcentagem($eleitores,$nulos). "% da quantidade total de eleitores";
+                        echo "\nO percentual de votos validos é: " .porcentagem($eleitores,$validos). "% da quantidade total de eleitores";
+                    }else if(($brancos + $validos + $nulos) < $eleitores || ($brancos + $validos + $nulos) > $eleitores){
+                        echo "Digite números válidos de votos!"; 
                     }
-                }
+                }    
+                
             ?>
         </textarea>
     </div>
